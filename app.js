@@ -3,29 +3,27 @@ const bodyParser = require("body-parser");
 const db = require(__dirname + "/dbexport.js");
 const bgview = require(__dirname + "/bigviewexport.js");
 const path = require('path');
-const app = express();
 
 
 var carbs = [35,50,20,40];
 var fats = [35,20,50,20];
 var proteins = [30,30,30,40];
 
+var app = express.createServer(
+  express.bodyParser()
+);
 
-
-
-app.set('view engine', 'ejs');
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
-
+app.configure( function () {
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'ejs');
+  app.use("/public", express.static(__dirname + '/public'));
+});
 
 app.get("/",function(req,res){
-
   res.render("home",{});
 });
 
 app.get("/computedietchart",function(req,res){
-
   res.render("comp_diet",{});
 });
 
@@ -45,11 +43,9 @@ app.post("/computedietchart",function(req,res){
   calorieperday = bmr*activity;
   calorieperday = calorieperday.toFixed(0);
   res.render("diet_chart",{title:"Your", carb: carbs[dietno],fat: fats[dietno], pro: proteins[dietno], cal: calorieperday, r: 1});
-
 });
 
 app.get("/getdietplan",function(req,res){
-
   res.render("diet_chart",{title:"Input",carb: " ",fat: " ", pro: " ", cal: " ", r:0});
 });
 
