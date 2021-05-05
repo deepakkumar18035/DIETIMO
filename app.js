@@ -71,6 +71,6 @@ var item = bgview(id);
   res.render("bigview",{item:item});
 });
 
-app.listen(3000, function(){
+app.listen(process.env.PORT, function(){
   console.log("Server started on port 3000");
 })
