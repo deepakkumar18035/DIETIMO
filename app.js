@@ -15,7 +15,7 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 process.env.PWD = process.cwd();
-app.use(express.static(path.join(process.env.PWD, 'public')));
+app.use(express.static(path.join(process.env.PWD, 'Public')));
 
 
 app.get("/",function(req,res){
