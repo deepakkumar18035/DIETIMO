@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const db = require(__dirname + "/dbexport.js");
 const bgview = require(__dirname + "/bigviewexport.js");
+const path = require('path');
 const app = express();
 
 
@@ -15,7 +16,7 @@ var proteins = [30,30,30,40];
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
+app.use(express.urlencoded("public"));
 
 
 app.get("/",function(req,res){
