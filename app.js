@@ -14,7 +14,8 @@ var proteins = [30,30,30,40];
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public/"));
+process.env.PWD = process.cwd();
+app.use(express.static(path.join(process.env.PWD, 'public')));
 
 
 app.get("/",function(req,res){
